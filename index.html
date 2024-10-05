@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fretoxx</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6B73FF, #000DFF);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            z-index: 10; /* Pour que le texte soit au-dessus de l'effet de fond */
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #5865F2;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #4752C4;
+        }
+        .btn:active {
+            background-color: #3C45A2;
+        }
+
+        .contact-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #5865F2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .contact-btn:hover {
+            background-color: #5865F2;
+        }
+
+        /* Styles pour le bouton "Tarifs" en bas à droite */
+        .tarif-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px; /* Positionné en bas à droite */
+            background-color: #FF6B6B;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .tarif-btn:hover {
+            background-color: #FF5252;
+        }
+        .tarif-btn:active {
+            background-color: #E44D4D;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rejoins notre discord pour les vues cheap !</h1>
+        <p>Sur ce serveur, tu as toutes les disponibilités de la communauté TikTok à portée de main !</p>
+        <a href="https://discord.gg/tiktokview" class="btn">Le serveur Discord</a>
+        <br><br> <!-- Espace entre les deux boutons -->
+        <a href="https://guns.lol/frxsh" class="btn">Social</a> <!-- Nouveau bouton Social -->
+    </div>
+
+    <a href="https://tiktok.com/@nakachebueno" class="contact-btn">Contactez-nous</a>
+
+    <!-- Bouton "Tarifs" en bas à droite -->
+    <a href="tarifs.html" class="tarif-btn">Voir nos tarifs</a>
+
+    <script>
+        document.body.addEventListener('mousemove', function(e) {
+            let x = e.clientX / window.innerWidth;
+            let y = e.clientY / window.innerHeight;
+
+            // Calculer une nouvelle couleur basée sur la position de la souris
+            let startColor = `rgb(${Math.round(255 * x)}, ${Math.round(255 * y)}, 255)`;
+            let endColor = `rgb(${Math.round(255 * (1 - x))}, ${Math.round(255 * (1 - y))}, 255)`;
+
+            // Appliquer le nouveau dégradé en fond
+            document.body.style.background = `linear-gradient(135deg, ${startColor}, ${endColor})`;
+        });
+    </script>
+</body>
+</html>
