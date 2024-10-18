@@ -88,21 +88,6 @@
         .tarif-btn:active {
             background-color: #E44D4D;
         }
-
-        /* Style pour le compteur de visites */
-        .visit-counter {
-            position: absolute;
-            bottom: 70px; /* Ajusté pour être au-dessus du bouton Contactez-nous */
-            left: 20px;
-            display: flex;
-            align-items: center;
-            color: white;
-            font-size: 1rem;
-        }
-        .visit-counter img {
-            width: 20px; /* Ajuste la taille de l'image */
-            margin-right: 5px; /* Espace entre l'image et le texte */
-        }
     </style>
 </head>
 <body>
@@ -114,13 +99,9 @@
         <a href="https://guns.lol/frxsh" class="btn">Social</a> <!-- Nouveau bouton Social -->
     </div>
 
-    <!-- Compteur de visites au-dessus du bouton Contactez-nous -->
-    <div class="visit-counter">
-        <img src="eye-icon.png" alt="Eye icon"> <!-- Remplacez par le chemin de votre image -->
-        <span id="visit-count">0 visites</span>
-    </div>
-
     <a href="https://tiktok.com/@fretoxx" class="contact-btn">Contactez-nous</a>
+
+    <!-- Bouton "Tarifs" en bas à droite -->
     <a href="tarifs.html" class="tarif-btn">Voir nos tarifs</a>
 
     <script>
@@ -129,19 +110,12 @@
             let y = e.clientY / window.innerHeight;
 
             // Calculer une nouvelle couleur basée sur la position de la souris
-            let startColor = `rgb(${Math.round(255 * x)}, ${Math.round(255 * y)}, 255)`;
-            let endColor = `rgb(${Math.round(255 * (1 - x))}, ${Math.round(255 * (1 - y))}, 255)`;
+            let startColor = rgb(${Math.round(255 * x)}, ${Math.round(255 * y)}, 255);
+            let endColor = rgb(${Math.round(255 * (1 - x))}, ${Math.round(255 * (1 - y))}, 255);
 
             // Appliquer le nouveau dégradé en fond
-            document.body.style.background = `linear-gradient(135deg, ${startColor}, ${endColor})`;
+            document.body.style.background = linear-gradient(135deg, ${startColor}, ${endColor});
         });
-
-        // Simuler le comptage de visites (remplacez ceci par un vrai compteur si nécessaire)
-        let visitCount = 0;
-        setInterval(() => {
-            visitCount++;
-            document.getElementById('visit-count').innerText = `${visitCount} visites`;
-        }, 1000); // Incrémente le compteur chaque seconde
     </script>
 </body>
 </html>
