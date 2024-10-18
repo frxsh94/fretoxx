@@ -92,7 +92,7 @@
         /* Style pour le compteur de visites */
         .visit-counter {
             position: absolute;
-            bottom: 20px;
+            bottom: 70px; /* Ajusté pour être au-dessus du bouton Contactez-nous */
             left: 20px;
             display: flex;
             align-items: center;
@@ -114,14 +114,14 @@
         <a href="https://guns.lol/frxsh" class="btn">Social</a> <!-- Nouveau bouton Social -->
     </div>
 
-    <a href="https://tiktok.com/@fretoxx" class="contact-btn">Contactez-nous</a>
-    <a href="tarifs.html" class="tarif-btn">Voir nos tarifs</a>
-
-    <!-- Compteur de visites -->
+    <!-- Compteur de visites au-dessus du bouton Contactez-nous -->
     <div class="visit-counter">
         <img src="eye-icon.png" alt="Eye icon"> <!-- Remplacez par le chemin de votre image -->
         <span id="visit-count">0 visites</span>
     </div>
+
+    <a href="https://tiktok.com/@fretoxx" class="contact-btn">Contactez-nous</a>
+    <a href="tarifs.html" class="tarif-btn">Voir nos tarifs</a>
 
     <script>
         document.body.addEventListener('mousemove', function(e) {
