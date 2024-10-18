@@ -88,6 +88,21 @@
         .tarif-btn:active {
             background-color: #E44D4D;
         }
+
+        /* Style pour le compteur de visites */
+        .visit-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+        }
+        .visit-counter img {
+            width: 20px; /* Ajuste la taille de l'image */
+            margin-right: 5px; /* Espace entre l'image et le texte */
+        }
     </style>
 </head>
 <body>
@@ -96,13 +111,17 @@
         <p>Sur ce serveur, tu as toutes les disponibilités de la communauté TikTok à portée de main !</p>
         <a href="https://discord.gg/tiktokview" class="btn">Le serveur Discord</a>
         <br><br> <!-- Espace entre les deux boutons -->
-        <a href="https://guns.lol/fretoxx" class="btn">Social</a> <!-- Nouveau bouton Social -->
+        <a href="https://guns.lol/frxsh" class="btn">Social</a> <!-- Nouveau bouton Social -->
     </div>
 
     <a href="https://tiktok.com/@fretoxx" class="contact-btn">Contactez-nous</a>
-
-    <!-- Bouton "Tarifs" en bas à droite -->
     <a href="tarifs.html" class="tarif-btn">Voir nos tarifs</a>
+
+    <!-- Compteur de visites -->
+    <div class="visit-counter">
+        <img src="eye-icon.png" alt="Eye icon"> <!-- Remplacez par le chemin de votre image -->
+        <span id="visit-count">0 visites</span>
+    </div>
 
     <script>
         document.body.addEventListener('mousemove', function(e) {
@@ -116,6 +135,13 @@
             // Appliquer le nouveau dégradé en fond
             document.body.style.background = `linear-gradient(135deg, ${startColor}, ${endColor})`;
         });
+
+        // Simuler le comptage de visites (remplacez ceci par un vrai compteur si nécessaire)
+        let visitCount = 0;
+        setInterval(() => {
+            visitCount++;
+            document.getElementById('visit-count').innerText = `${visitCount} visites`;
+        }, 1000); // Incrémente le compteur chaque seconde
     </script>
 </body>
 </html>
