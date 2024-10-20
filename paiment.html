@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement</title>
+    <script src="https://www.paypal.com/sdk/js?client-id=Aegw2xrjCQU9sB4Uj_bdNlCAWZAzbzYCZXbI5QmEuwVkF9-NXSikmHQLcCVN8h_ZJShrHUHj71bwiDJQ&currency=EUR"></script> <!-- Remplacer VOTRE_CLIENT_ID par l'ID PayPal -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2C2C2C;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative; /* Nécessaire pour positionner le bouton */
+        }
+        .form-container {
+            background-color: #3C3C3C;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            margin-bottom: 10px;
+        }
+        #paypal-button-container {
+            margin-top: 20px;
+        }
+        .back-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: #5865F2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #4752C4;
+        }
+        .back-btn:active {
+            background-color: #3C45A2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="category">Catégorie</label>
+            <select id="category" name="category" required>
+                <option value="Vues">Vues</option>
+                <option value="Likes">Likes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantité</label>
+            <select id="quantity" name="quantity" required>
+                <optgroup label="Vues">
+                    <option value="10000" data-price="1.50">10.000 vues - 1,50 €</option>
+                    <option value="50000" data-price="2.00">50.000 vues - 2,00 €</option>
+                    <option value="100000" data-price="3.50">100.000 vues - 3,50 €</option>
+                    <option value="500000" data-price="5.00">500.000 vues - 5,00 €</option>
+                    <option value="1000000" data-price="6.00">1.000.000 vues - 6,00 €</option>
+                    <option value="2000000" data-price="8.00">2.000.000 vues - 8,00 €</option>
+                    <option value="5000000" data-price="12.00">5.000.000 vues - 12,00 €</option>
+                </optgroup>
+                <optgroup label="Likes">
+                    <option value="5000" data-price="1.50">5.000 likes - 1,50 €</option>
+                    <option value="10000" data-price="3.50">10.000 likes - 3,50 €</option>
+                    <option value="30000" data-price="5.00">30.000 likes - 5,00 €</option>
+                    <option value="50000" data-price="8.00">50.000 likes - 8,00 €</option>
+                    <option value="70000" data-price="10.00">70.000 likes - 10,00 €</option>
+                    <option value="100000" data-price="14.00">100.000 likes - 14,00 €</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <!-- Nouveau champ pour entrer le lien de la vidéo -->
+        <div class="form-group">
+            <label for="video-url">Lien de la vidéo</label>
+            <input type="url" id="video-url" name="video-url" placeholder="https://www.tiktok.com/@exemple/video/" required>
+        </div>
+
+        <div id="paypal-button-container"></div>
+    </div>
+
+    <!-- Bouton de retour en bas à gauche -->
+    <a href="index.html" class="back-btn">Retour</a>
+
+    <script>
+        const categorySelect = document.getElementById('category');
+        const quantitySelect = document.getElementById('quantity');
+        const videoUrlInput = document.getElementById('video-url');
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                const quantity = quantitySelect.options[quantitySelect.selectedIndex];
+                const price = quantity.getAttribute('data-price');
+
+                return actions.order.create({
+                    purchase_units: [{
+                        description: categorySelect.value + ' - ' + quantity.text,
+                        amount: {
+                            value: price
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction effectuée par ' + details.payer.name.given_name);
+
+                    // Envoyer la commande au serveur pour l'enregistrer
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "enregistrer_commande.php", true); // fichier PHP pour traiter la commande
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send(
+                        "category=" + categorySelect.value + 
+                        "&quantity=" + quantitySelect.value + 
+                        "&price=" + quantity.getAttribute('data-price') + 
+                        "&video_url=" + encodeURIComponent(videoUrlInput.value)
+                    );
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+
+</body>
+</html>
